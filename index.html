@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Pokemon Rock Paper Scissors" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script type="text/javascript">
+        let playerScore = 0;
+        let computerScore = 0;
+
+        //0 = player win, 1 = draw, 2 = tie
+        let winCase = 0;
+
+
+        function GetComputerPokemon()
+        {
+            num = Math.random();
+            if(num <= 1/3)
+            {
+                return 0;
+            }
+            if(num <= 2/3)
+            {
+                return 1;
+            }
+            return 2;
+        }
+
+        function UpdateScore()
+        {
+            document.getElementById("PlayerScore").innerHTML = "Player Score: " + playerScore;
+            document.getElementById("ComputerScore").innerHTML = "Computer Score: " + computerScore;
+
+            if(winCase == 0)
+            {
+                document.getElementById("info").innerHTML = "Player won!";
+            }
+            else if (winCase == 1)
+            {
+                document.getElementById("info").innerHTML = "You tied!";
+            }
+            else
+            {
+                document.getElementById("info").innerHTML = "Computer won!";
+            }
+
+        }
+
+        function CalculateWinner(playerPokemon)
+        {
+            //0 = Charmaner, 1 = Bulbasaur, 2 = Squirtle
+
+            console.log(playerPokemon);
+
+            computerPokemon = GetComputerPokemon();
+
+            console.log()
+            if(playerPokemon == 0)
+            {
+                if(computerPokemon == 0)
+                {
+                    winCase = 1;
+                }
+                else if(computerPokemon == 1)
+                {
+                    playerScore++;
+                    winCase = 0;
+                }
+                else
+                {
+                    computerScore++;
+                    winCase = 2;
+                }
+            }
+            else if(playerPokemon == 1)
+            {
+                if(computerPokemon == 0)
+                {
+                    computerScore++;
+                    winCase = 2;
+                }
+                else if(computerPokemon == 1)
+                {
+                    winCase = 1;
+                }
+                else
+                {
+                    playerScore++;
+                    winCase = 0;
+                }
+            }
+            else
+            {
+                if(computerPokemon == 0)
+                {
+                    playerScore++;
+                    winCase = 0;
+                }
+                else if(computerPokemon == 1)
+                {
+                    computerScore++;
+                    winCase = 2;
+                }
+                else
+                {
+                    winCase = 1;
+                }
+            }
+            UpdateScore();
+        }
+    </script>
+
+    <div class="main-container">
+        <div class="navbar-container">
+            <h1 class="choose-pokemon">Choose your Pokemon!</h1>
+        </div>
+
+        <div class="score-container">
+            <h3 id="PlayerScore" class="player-score"> Player Score: 0</h3>
+            <h3 id="ComputerScore" class="computer-score">Computer Score: 0</h3>
+        </div>
+
+        <div class="info-container">
+            <h3 class="info" id="info"></h3>
+        </div>
+
+        <div class="pokemon-select-container">
+            <div class="pokemon-item">
+                <img src="Images/charmander.jpg" alt="An image of Charmander.">
+                <button type="button" onclick="CalculateWinner(0)" class="charmander-button">Charmander!</button>
+            </div>
+            <div class="pokemon-item">
+                <img src="Images/Bulbasaur.png" alt="An image of Bulbasaur.">
+                <button type="button" onclick="CalculateWinner(1)" class="bulbasaur-button">Bulbasaur!</button>
+            </div>
+            <div class="pokemon-item">
+                <img src="Images/Squirtle.jpeg" alt="An image of cool Squirtle.">
+                <button type="button" onclick="CalculateWinner(2)" class="squirtle-button">Squirtle!</button>
+            </div>
+        </div>
+
+        <div class="footer-container">
+            <h4>Copyright &copy Tommy Mapp 2021</h4>
+        </div>
+    </div>
+</body>
+</html>
